@@ -28,7 +28,6 @@ class Network(nn.Module):
         
     def forward(self, x):
         ''' Forward pass through the network, returns the output logits '''
-        
         for each in self.hidden_layers:
             x = F.relu(each(x))
             x = self.dropout(x)
@@ -42,7 +41,8 @@ def validation(model, testloader, criterion):
     test_loss = 0
     for images, labels in testloader:
 
-        images = images.resize_(images.size()[0], 784)
+#         images = images.resize_(images.size()[0], 784)
+        images = images.view(images.shape[0], -1)
 
         output = model.forward(images)
         test_loss += criterion(output, labels).item()
@@ -69,7 +69,8 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs=5, print_
             steps += 1
             
             # Flatten images into a 784 long vector
-            images.resize_(images.size()[0], 784)
+#             images.resize_(images.size()[0], 784)
+            images = images.view(images.shape[0], -1)
             
             optimizer.zero_grad()
             

@@ -10,7 +10,7 @@ def _get_loss_acc(model, train_loader, valid_loader):
     """
     Get losses and validation accuracy of example neural network
     """
-    n_epochs = 2
+    n_epochs = 5
     learning_rate = 0.001
     
     # Training loss
@@ -105,5 +105,5 @@ def hist_dist(title, distribution_tensor, hist_range=(-4, 4)):
     Display histogram of values in a given distribution tensor
     """
     plt.title(title)
-    plt.hist(distribution_tensor, np.linspace(*hist_range, num=len(distribution_tensor)/2))
+    plt.hist(distribution_tensor, np.linspace(*hist_range, num=int(len(distribution_tensor)/2)))
     plt.show()
